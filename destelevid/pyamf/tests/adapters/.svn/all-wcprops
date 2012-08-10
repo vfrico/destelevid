@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters
+END
+test_elixir.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/test_elixir.py
+END
+test_google.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/test_google.py
+END
+test_array.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/test_array.py
+END
+test_collections.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/test_collections.py
+END
+_google_models.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/_google_models.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/__init__.py
+END
+test_sqlalchemy.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/test_sqlalchemy.py
+END
+test_django.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/test_django.py
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/flex
+END
+data.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/flex/data.py
+END
+messaging.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/flex/messaging.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/flex/__init__.py
+END

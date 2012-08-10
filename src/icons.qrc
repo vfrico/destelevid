@@ -1,0 +1,21 @@
+<RCC>
+  <qresource prefix="acercade">
+    <file>about.png</file>
+  </qresource>
+  <qresource prefix="cerrar">
+    <file>close.png</file>
+  </qresource>
+  <qresource prefix="info">
+    <file>info.png</file>
+  </qresource>
+  <qresource prefix="gear">
+    <file>gear-1.png</file>
+  </qresource>
+  <qresource prefix="descargas">
+    <file>descarga.png</file>
+  </qresource>
+  <qresource prefix="destelevid">
+    <file>Destelevid.png</file>
+  </qresource>
+  <qresource prefix="newPrefix"/>
+</RCC>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Destelevid</class>
+ <widget class="QMainWindow" name="Destelevid">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>725</width>
+    <height>175</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>725</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>725</width>
+    <height>337</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Destelevid</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="src/icons.qrc">
+    <normaloff>:/destelevid/Destelevid.png</normaloff>:/destelevid/Destelevid.png</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>721</width>
+      <height>36</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="font">
+        <font>
+         <family>Monospace</family>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="botonintroduce">
+       <property name="text">
+        <string>Introduce URL</string>
+       </property>
+       <property name="icon">
+        <iconset resource="src/icons.qrc">
+         <normaloff>:/info/info.png</normaloff>:/info/info.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="botondescargar">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>50</y>
+      <width>150</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Descargar Vídeo</string>
+    </property>
+    <property name="icon">
+     <iconset resource="src/icons.qrc">
+      <normaloff>:/descargas/descarga.png</normaloff>:/descargas/descarga.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botondescifrar">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>50</y>
+      <width>150</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Descifrar URL</string>
+    </property>
+    <property name="icon">
+     <iconset resource="src/icons.qrc">
+      <normaloff>:/gear/gear-1.png</normaloff>:/gear/gear-1.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botonacercade">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>140</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Acerca de</string>
+    </property>
+    <property name="icon">
+     <iconset resource="src/icons.qrc">
+      <normaloff>:/acercade/about.png</normaloff>:/acercade/about.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botoncerrar">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>140</y>
+      <width>97</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cerrar</string>
+    </property>
+    <property name="icon">
+     <iconset resource="src/icons.qrc">
+      <normaloff>:/cerrar/close.png</normaloff>:/cerrar/close.png</iconset>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>705</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+     </font>
+    </property>
+   </widget>
+  </widget>
+  <action name="actionCerrar">
+   <property name="text">
+    <string>Cerrar</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>Acerca de</string>
+   </property>
+  </action>
+  <action name="actionServicios_soportados">
+   <property name="text">
+    <string>Servicios soportados</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="src/icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

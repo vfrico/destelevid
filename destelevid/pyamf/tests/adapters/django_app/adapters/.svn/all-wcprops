@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/django_app/adapters
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/django_app/adapters/__init__.py
+END
+models.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/adapters/django_app/adapters/models.py
+END

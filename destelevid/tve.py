@@ -1,0 +1,224 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# This file is part of PyDownTV.
+#
+#    PyDownTV is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    PyDownTV is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with PyDownTV.  If not, see <http://www.gnu.org/licenses/>.
+
+# Módulo para descargar todos los vídeos de la web de rtve.es ("A la carta" o no)
+# Antes era el módulo de tvalacarta.py modificado para dar soporte a todos los vídeos
+
+__author__="aabilio"
+__date__ ="$31-mar-2011 11:35:37$"
+
+# Puedes importar Descargar para utilizar su método descargar al que se le pasa una
+# url y delvuelve un strema con el contenido de lo descargado:
+# ejemplo:
+# D = Descargar(url)
+# stream = D.descargar()
+
+import sys
+from Descargar import Descargar
+import httplib
+import urllib
+import urllib2
+from utiles import salir, formatearNombre, printt
+
+class TVE(object): # Identificativo del canal
+    '''
+        Clase para manejar los vídeos de la RTVE (todos).
+    '''
+
+    def __init__(self, url=""):
+        '''
+            Solo reseñar que reibe una URL válida de Televisión Española como parámetro
+        '''
+        self._URL_recibida = url
+
+    def getURL(self):
+        '''
+            Obtener la URL de televisión española
+        '''
+        return self._URL_recibida
+    def setURL(self, url):
+        '''
+            return la URL válida de TVE que se le pasa a la clase
+        '''
+        self._URL_recibida = url
+    url = property(getURL, setURL)
+
+    # Funciones privadas que ayuden a procesarDescarga(self):
+    def __descHTML(self, url2down):
+        ''' Método que utiliza la clase descargar para descargar el HTML '''
+        D = Descargar(url2down)
+        return D.descargar()
+    def __descXML(self, url2down):
+        ''' Método que utiliza la clase descargar para descargar XML '''
+        D = Descargar(url2down)
+        return D.descargar()
+    
+    def __getUrlIpad(self):
+        user_agent = 'Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.10'
+        opener = urllib2.build_opener(NoRedirectHandler())
+        urllib2.install_opener(opener)
+        headers = { 'User-Agent' : user_agent }
+        req = urllib2.Request(self._URL_recibida, None, headers)
+        u = urllib2.urlopen(req)
+        try:
+            urlVideo = u.info().getheaders("Location")[0]
+        except:
+            return "ERROR"
+        u.close()
+        return urlVideo
+    
+    def __ztnr(self, id):
+        html = self.__descHTML("http://www.rtve.es/ztnr/?idasset=" + id)
+        url = "http://rtve.es/ztnr/" + html.split("<td  class=\"s0\"><a target=")[1].split("href=\"")[1].split("\"")[0]
+        html = self.__descHTML(url)
+        if html.find(".mp4") != -1: return "http://www.rtve.es/resources/" + html.split(".mp4")[0].split(">")[-1] + ".mp4"
+        elif html.find(".flv") != -1: return "http://www.rtve.es/resources/" + html.split(".flv")[0].split(">")[-1] + ".flv" 
+
+    def procesarDescarga(self):
+        '''
+            Procesa lo necesario para obtener la url final del vídeo a descargar y devuelve
+            esta y el nombre como se quiere que se descarge el archivo de la siguiente forma:
+            return [ruta_url, nombre]
+
+            Si no se quiere especificar un nombre para el archivo resultante en disco, o no se
+            conoce un procedimiento para obtener este automáticamente se utilizará:
+            return [ruta_url, None]
+            Y el método de Descargar que descarga utilizará el nombre por defecto según la url.
+        '''
+        # Primero: nos quedamos con le id dependiendo si el user metio la url con
+        # una barra (/) final o no y si tiene extensión (no es alacarta)
+        videoID = self._URL_recibida.split('/')[-1]
+        if videoID == "":
+            videoID = self._URL_recibida.split('/')[-2]
+        elif videoID.find(".shtml") != -1 or videoID.find(".html") != -1 or \
+            videoID.find(".html") != -1:
+            videoID = videoID.split('.')[0]
+        
+        # Añadido para vídeos nuevos (periodo de prueba):
+        sourceHTML = self.__descHTML(self._URL_recibida)
+        if sourceHTML.find("flashcontentId:\'videoplayer") != -1:
+            videoID_comp = sourceHTML.split("flashcontentId:\'videoplayer")[1].split("\'")[0]
+            if videoID_comp != videoID: videoID = videoID_comp
+        if sourceHTML.find("<div id=\"video") != -1:
+            videoID_comp = sourceHTML.split("<div id=\"video")[1].split("\"")[0]
+            if videoID_comp != videoID: videoID = videoID_comp
+        ########################################################
+        
+        
+        printt(u"[INFO] ID del Vídeo :", videoID)
+        
+        #Primero probar nuevo método:
+        url = self.__ztnr(videoID)
+        #print "URL:",url
+        if url != "http://www.rtve.es/resources/.mp4" or url != url != "http://www.rtve.es/resources/.flv":
+            name = sourceHTML.split("<title>")[1].split("</")[0] + ".mp4"
+            name = formatearNombre(name)
+            return [url, name]
+            
+        xmlURL = "www.rtve.es/swf/data/es/videos/video/" + videoID[-1] \
+                + "/" + videoID[-2] + "/" + videoID[-3] \
+                + "/" + videoID[-4] + "/" + videoID + ".xml"
+        printt(u"[INFO] Url de xml   :", xmlURL)
+        
+        # Este bloque o debería de entrar si funciona el bloque de prueba:
+        sourceXML = self.__descXML(xmlURL)
+        if sourceXML == -1:    # Comprobar si existe (No es tve a la carta)
+            sourceHTML = self.__descHTML(self._URL_recibida)
+            if sourceHTML.find("<div id=\"video") != -1:
+                id = sourceHTML.split("<div id=\"video")[1].split("\"")[0]
+            elif sourceHTML.find("<div id=\"vid") != -1:
+                id = sourceHTML.split("<div id=\"vid")[1].split("\"")[0]
+            else:
+                salir(u"[!] ERROR al generear el nuevo id")
+            
+            xmlURL = "www.rtve.es/swf/data/es/videos/video/" + id[-1] \
+                + "/" + id[-2] + "/" + id[-3] \
+                + "/" + id[-4] + "/" + id + ".xml"
+            sourceXML = self.__descXML(xmlURL)
+            printt(u"[INFO] Nuevo vídeo ID:",  id)
+            printt(u"[INFO] Nuevo url de xml:", xmlURL)  
+        
+            
+
+        # Ahora la url final del video puede estar entre las etiquetas <file></file>
+        # o puede que tengamos que dar un rodeo
+        if sourceXML.find("<file>") != -1 and sourceXML.find("</file>") != -1: # Contiene la URL
+            urlVideo = sourceXML.split("<file>")[1].split("</file>")[0]
+        elif sourceXML.find("assetDataId::") != -1: # Dar el rodeo
+            idAsset = sourceXML.split("assetDataId::")[1].split("\"/>")[0]
+            urlXMLasset = "www.rtve.es/scd/CONTENTS/ASSET_DATA_VIDEO/" + idAsset[-1] \
+                        + "/" + idAsset[-2] + "/" + idAsset[-3] \
+                        + "/" + idAsset[-4] + "/ASSET_DATA_VIDEO-" + idAsset + ".xml"
+            sourceAssetXML = self.__descXML(urlXMLasset)
+            try:
+                urlInSourceAssetXML = sourceAssetXML.split("defaultLocation=\"")[1].split("\"")[0]
+            except AttributeError:
+                urlInSourceAssetXML = "retrochapuza"
+                url = self.__getUrlIpad()
+                if url == "ERROR": # Buscar vídeo en A la Carta
+                    try:
+                        self._URL_recibida = sourceXML.split("<url>")[1].split("<")[0]
+                    except:
+                        printt(u"[!!!] No he encontrado el vídeo :(")
+                        salir(u"")
+                    url = self.__getUrlIpad()
+                sourceHTML = self.__descHTML(url)
+                urlVideo = "http://www.rtve.es" + sourceHTML.split(".mp4")[0].split("urlContent=")[1] + ".mp4" 
+                # Probar esta url (obtener nueva url, necesario para el script!!):
+                u = urllib2.urlopen(urlVideo)
+                meta = u.info()
+                file_size = int(meta.getheaders("Content-Length")[0])
+                if file_size == 0:
+                    urlVideo = meta.getheaders("Location")[0]
+                u.close()
+                
+                
+            #print "urllInSourceAssetXML =", urlInSourceAssetXML
+
+            # Es flv o mp4?
+            if urlInSourceAssetXML.find("/flv/") != -1:
+                urlVideo = "http://www.rtve.es/resources/TE_NGVA/flv/" \
+                        + urlInSourceAssetXML.split("/flv/")[1]
+            elif urlInSourceAssetXML.find("/mp4/") != -1:
+                urlVideo = "http://www.rtve.es/resources/TE_NGVA/mp4/" \
+                        + urlInSourceAssetXML.split("/mp4/")[1]
+            elif urlInSourceAssetXML == "retrochapuza": pass
+            else:
+                salir(u"Vídeo no encontrado")
+            
+            
+        else:
+            salir(u"No se encuentra la URL del vídeo")
+
+        # Nombre con el que se guardará la descarga:
+        extension = '.' + urlVideo.split('.')[-1]
+        name =  sourceXML.split("<name>")[1].split("</name")[0] + extension
+        name = formatearNombre(name)
+
+        return [urlVideo, name]
+
+class NoRedirectHandler(urllib2.HTTPRedirectHandler):
+    def http_error_302(self, req, fp, code, msg, headers):
+        infourl = urllib.addinfourl(fp, headers, req.get_full_url())
+        infourl.status = code
+        infourl.code = code
+        return infourl
+    http_error_300 = http_error_302
+    http_error_301 = http_error_302
+    http_error_303 = http_error_302
+    http_error_307 = http_error_302

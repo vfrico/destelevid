@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/gateway
+END
+test_wsgi.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/gateway/test_wsgi.py
+END
+test_google.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/gateway/test_google.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/gateway/__init__.py
+END
+test_django.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/gateway/test_django.py
+END
+test_twisted.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/214/trunk/trunk/Servers/pyamf/tests/gateway/test_twisted.py
+END

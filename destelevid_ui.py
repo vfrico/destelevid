@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'destelevid.ui'
+#
+# Created: Thu Aug  9 21:51:43 2012
+#      by: pyside-uic 0.2.11 running on PySide 1.0.6
+#
+# WARNING! All changes made in this file will be lost!
+
+from PySide import QtCore, QtGui
+
+class Ui_Destelevid(object):
+    def setupUi(self, Destelevid):
+        Destelevid.setObjectName("Destelevid")
+        Destelevid.resize(725, 175)
+        Destelevid.setMinimumSize(QtCore.QSize(725, 0))
+        Destelevid.setMaximumSize(QtCore.QSize(725, 337))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/destelevid/Destelevid.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Destelevid.setWindowIcon(icon)
+        Destelevid.setAutoFillBackground(False)
+        Destelevid.setUnifiedTitleAndToolBarOnMac(False)
+        self.centralwidget = QtGui.QWidget(Destelevid)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayoutWidget = QtGui.QWidget(self.centralwidget)
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(0, 10, 721, 36))
+        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayout = QtGui.QGridLayout(self.gridLayoutWidget)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setObjectName("gridLayout")
+        self.lineEdit = QtGui.QLineEdit(self.gridLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("Monospace")
+        self.lineEdit.setFont(font)
+        self.lineEdit.setObjectName("lineEdit")
+        self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
+        self.botonintroduce = QtGui.QPushButton(self.gridLayoutWidget)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/info/info.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botonintroduce.setIcon(icon1)
+        self.botonintroduce.setFlat(True)
+        self.botonintroduce.setObjectName("botonintroduce")
+        self.gridLayout.addWidget(self.botonintroduce, 0, 0, 1, 1)
+        self.botondescargar = QtGui.QPushButton(self.centralwidget)
+        self.botondescargar.setGeometry(QtCore.QRect(400, 50, 150, 40))
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/descargas/descarga.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botondescargar.setIcon(icon2)
+        self.botondescargar.setObjectName("botondescargar")
+        self.botondescifrar = QtGui.QPushButton(self.centralwidget)
+        self.botondescifrar.setGeometry(QtCore.QRect(190, 50, 150, 40))
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/gear/gear-1.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botondescifrar.setIcon(icon3)
+        self.botondescifrar.setObjectName("botondescifrar")
+        self.botonacercade = QtGui.QPushButton(self.centralwidget)
+        self.botonacercade.setGeometry(QtCore.QRect(10, 140, 111, 31))
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(":/acercade/about.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botonacercade.setIcon(icon4)
+        self.botonacercade.setObjectName("botonacercade")
+        self.botoncerrar = QtGui.QPushButton(self.centralwidget)
+        self.botoncerrar.setGeometry(QtCore.QRect(620, 140, 97, 31))
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/cerrar/close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.botoncerrar.setIcon(icon5)
+        self.botoncerrar.setObjectName("botoncerrar")
+        self.lineEdit_2 = QtGui.QLineEdit(self.centralwidget)
+        self.lineEdit_2.setGeometry(QtCore.QRect(10, 100, 705, 31))
+        font = QtGui.QFont()
+        font.setFamily("Monospace")
+        self.lineEdit_2.setFont(font)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        Destelevid.setCentralWidget(self.centralwidget)
+        self.actionCerrar = QtGui.QAction(Destelevid)
+        self.actionCerrar.setObjectName("actionCerrar")
+        self.actionAcerca_de = QtGui.QAction(Destelevid)
+        self.actionAcerca_de.setObjectName("actionAcerca_de")
+        self.actionServicios_soportados = QtGui.QAction(Destelevid)
+        self.actionServicios_soportados.setObjectName("actionServicios_soportados")
+
+        self.retranslateUi(Destelevid)
+        QtCore.QMetaObject.connectSlotsByName(Destelevid)
+
+    def retranslateUi(self, Destelevid):
+        Destelevid.setWindowTitle(QtGui.QApplication.translate("Destelevid", "Destelevid", None, QtGui.QApplication.UnicodeUTF8))
+        self.botonintroduce.setText(QtGui.QApplication.translate("Destelevid", "Introduce URL", None, QtGui.QApplication.UnicodeUTF8))
+        self.botondescargar.setText(QtGui.QApplication.translate("Destelevid", "Descargar Vídeo", None, QtGui.QApplication.UnicodeUTF8))
+        self.botondescifrar.setText(QtGui.QApplication.translate("Destelevid", "Descifrar URL", None, QtGui.QApplication.UnicodeUTF8))
+        self.botonacercade.setText(QtGui.QApplication.translate("Destelevid", "Acerca de", None, QtGui.QApplication.UnicodeUTF8))
+        self.botoncerrar.setText(QtGui.QApplication.translate("Destelevid", "Cerrar", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionCerrar.setText(QtGui.QApplication.translate("Destelevid", "Cerrar", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAcerca_de.setText(QtGui.QApplication.translate("Destelevid", "Acerca de", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionServicios_soportados.setText(QtGui.QApplication.translate("Destelevid", "Servicios soportados", None, QtGui.QApplication.UnicodeUTF8))
+
+import icons_rc
